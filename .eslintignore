@@ -1,0 +1,7 @@
+locale
+dist
+coverage
+.nuxt
+packages/*/dist/**
+docs/static
+node_modules/**
