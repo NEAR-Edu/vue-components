@@ -1,0 +1,32 @@
+{
+  "name": "@neardev/vue-use-near-api",
+  "version": "0.0.1-alpha.1",
+  "description": "Near api js for Vue.js",
+  "author": "Yegor Loginov <kittydragon88@gmail.com>",
+  "license": "MIT",
+  "module": "dist/vue-near-api-js.esm.js",
+  "unpkg": "dist/vue-near-api-js.js",
+  "main": "dist/vue-near-api-js.js",
+  "types": "dist/vue-near-api-js.d.ts",
+  "homepage": "https://vue-use-near.near.org/",
+  "repository": "https://github.com/sherif/vue-use-near-api",
+  "sideEffects": false,
+  "keywords": [
+    "VueJS",
+    "Vue",
+    "Near",
+    "near",
+    "wallet",
+    "Wallet"
+  ],
+  "files": [
+    "dist/*.js",
+    "dist/*.d.ts"
+  ],
+  "dependencies": {
+    "near-api-js": "^0.41.0"
+  },  
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  }
+}
