@@ -20,6 +20,6 @@
   yarn serve
 
   just now, if you encounter eslint problem for files built in package, then please try again(yarn serve).
-  I already add eslint ignore patter for this, but it not working well, but it will try to fix it soon.
+  I already add eslint ignore pattern for this, but it not working well, but I will try to fix it soon.
 
 ## the usage of wallet component
