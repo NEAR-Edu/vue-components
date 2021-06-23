@@ -42,12 +42,15 @@
 
 near api require [initialization](https://docs.near.org/docs/develop/front-end/introduction#connection) to connect to near network.
 To do this, you can use `initNear` function from vue-use-near-api package.
+Don't forget the call of initNear must be come up before root component will be mounted and initNear will return promise.
 
 ```js
 import { initNear } from '@neardev/vue-use-near-api';
-initNear().then(() => {
-  createApp(App).mount('#app');
-});
+const app = createApp(App);
+initNear(app)
+  .then(() => {
+    app.mount('#app');
+  });
 ```
 
 ### Declarative Component

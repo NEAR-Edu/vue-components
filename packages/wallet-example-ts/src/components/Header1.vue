@@ -13,7 +13,7 @@
 import MyButton from './Button.vue';
 import MyProfile from './Profile.vue';
 import { NearWallet } from '@neardev/vue-use-near-api';
-import { defineComponent } from '@vue/runtime-core';
+import { defineComponent, inject } from '@vue/runtime-core';
 
 export default defineComponent({
   name: 'my-header1',
@@ -22,6 +22,10 @@ export default defineComponent({
     MyButton,
     MyProfile,
     NearWallet,
+  },
+  setup() {
+    console.log('inject in app', inject('walletConnection'));
+    console.log(this.$walletConnection);
   },
 });
 </script>

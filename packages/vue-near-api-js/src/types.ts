@@ -1,3 +1,4 @@
+import { WalletConnection } from 'near-api-js';
 import { Ref, ComputedRef } from 'vue';
 
 export type MaybeRef<T> = Ref<T> | ComputedRef<T> | T;
@@ -41,6 +42,7 @@ export interface PrivateNearWalletComposite {
   lastStatusMessage: MaybeRef<string>;
   unitSymbol: MaybeRef<string>;
   isSignedIn: MaybeRef<boolean>;
+  rawConnection: MaybeRef<WalletConnection>;
   handleSignOut(): void;
   handleSignIn(): void;
   handleSyncAmount(): void;
