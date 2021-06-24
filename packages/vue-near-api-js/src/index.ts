@@ -1,4 +1,4 @@
-export { NearWallet } from './NearWallet';
-export { useNearWallet, useNearWalletStatus, initNear } from './useNearWallet';
-export * from './symbols';
-export { NearWalletStatus, NearWalletStatusCode, NearNetworkConfig, NearWalletComposable } from './types';
+export * from './near-wallet';
+export * from './near-account';
+export * from './near-contract';
+export { initNear } from './init';

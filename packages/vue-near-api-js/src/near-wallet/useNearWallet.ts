@@ -1,10 +1,14 @@
 import * as NearAPI from 'near-api-js';
-import { computed, onMounted, reactive, provide, inject, toRefs, toRef, watch, App, getCurrentInstance } from 'vue';
-import { NearWalletComposable, NearWalletStatus, NearWalletStatusCode } from './types';
-import getConfig from './config';
-import { NearWalletContextSymbol } from './symbols';
+import { computed, onMounted, reactive, provide, inject, toRefs, toRef, watch, getCurrentInstance } from 'vue';
+import {
+  NearWalletComposable,
+  NearWalletStatus,
+  NearWalletStatusCode,
+  PrivateNearWalletComposite,
+} from './wallet-types';
+import { NearWalletContextSymbol } from './wallet-symbols';
 
-const { connect, keyStores, WalletConnection, utils } = NearAPI;
+const { utils } = NearAPI;
 
 declare global {
   interface Window {
@@ -12,41 +16,13 @@ declare global {
     accountId: any;
   }
 }
-
-const nearConfig = getConfig(process.env.NODE_ENV || 'development');
-
-export async function initNear(app: App): Promise<void> {
-  console.log('initializing to connect near network');
-  try {
-    if (!app) {
-      console.log('please call initNear after created App(root component) and before mounting it');
-    }
-
-    if (app.config.globalProperties.$walletConnection) {
-      console.log('already connected to near network');
-      return;
-    }
-
-    const near = await connect({
-      ...nearConfig,
-      deps: { keyStore: new keyStores.BrowserLocalStorageKeyStore() },
-    });
-    const walletConnection = new WalletConnection(near, null);
-    app.config.globalProperties.$walletConnection = walletConnection;
-    app.config.globalProperties.$accountId = walletConnection.getAccountId();
-    console.log('near initialized successfully');
-  } catch (e) {
-    console.log('error while initializing');
-    console.log('connect', e);
-  }
-}
-
 export function useNearWallet(): NearWalletComposable {
   const internalInstance = getCurrentInstance();
   const walletConnection = internalInstance
     ? internalInstance.appContext.config.globalProperties.$walletConnection
     : null;
   const accountId = internalInstance ? internalInstance.appContext.config.globalProperties.$accountId : null;
+  const nearConfig = internalInstance ? internalInstance.appContext.config.globalProperties.$config : null;
 
   const state = reactive({
     status: NearWalletStatus.SUCCESS,
@@ -58,7 +34,8 @@ export function useNearWallet(): NearWalletComposable {
     formattedAmount: '',
     isSignedIn: false,
     rawConnection: walletConnection,
-  }) as NearWalletComposable;
+    config: nearConfig,
+  }) as PrivateNearWalletComposite;
 
   const setStatus = (newStatus: NearWalletStatus, newCode: NearWalletStatusCode, newMessage: string) => {
     const { status, lastStatusCode, lastStatusMessage } = toRefs(state);
@@ -86,9 +63,10 @@ export function useNearWallet(): NearWalletComposable {
 
   const handleSignIn = () => {
     const connection = toRef(state, 'rawConnection');
+    const nearConfig = toRef(state, 'config');
     setStatus(NearWalletStatus.LOADING, NearWalletStatusCode.SIGNING_IN, 'signing in near network');
     connection.value
-      .requestSignIn(nearConfig.contractName)
+      .requestSignIn(nearConfig.value.contractName)
       .then(() => {
         // // there's no need to make signed in flag to be true, because page will be refreshed.
         // const isSignedIn = toRef(state, 'isSignedIn');
