@@ -49,6 +49,7 @@ export function useNearWallet(): NearWalletComposable {
     if (!connection.value) {
       console.log(`warning in package, connection not established.
       please try to check you did call the initNear function globally`);
+      setStatus(NearWalletStatus.ERROR, NearWalletStatusCode.CONNECTION_FAILED, 'invalid connection');
       return;
     }
     if (connection.value.isSignedIn()) {

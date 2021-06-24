@@ -9,9 +9,7 @@ export enum NearWalletStatus {
 
 export enum NearWalletStatusCode {
   INITAL = 1,
-  CONNECT_FAILED,
-  CONNECTING,
-  CONNECTED,
+  CONNECTION_FAILED,
   SIGN_IN_FAILED,
   SIGNING_IN,
   SIGNED_IN,

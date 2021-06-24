@@ -27,7 +27,10 @@ export async function initNear(app: App, nearConfig: NearNetworkConfig): Promise
     app.config.globalProperties.$near = near;
     console.log('near initialized successfully');
   } catch (e) {
+    // The connection function in near api js module, isn't going to return error when failed,
+    // so I think there is no case which this code will be run.
     console.log('error while initializing');
     console.log('connect', e);
+    throw new Error(e);
   }
 }

@@ -1,9 +1,13 @@
 <template>
   <header>
     <div class="flex justify-end m-4">
-      <near-wallet v-slot="isSignedIn, handleSignIn">
-        <my-profile v-if="isSignedIn" />
-        <my-button size="large" label="Log in" @click="handleSignIn" v-else />
+      <near-wallet v-slot="{ isSignedIn, handleSignIn, formattedAmount, amount }">
+        <div>{{ formattedAmount }}asdfasdf</div>
+        <div>{{ amount }}</div>
+        <div>
+          <my-profile v-if="isSignedIn" />
+          <my-button size="large" label="Log in" @click="handleSignIn" v-else />
+        </div>
       </near-wallet>
     </div>
   </header>
@@ -13,7 +17,7 @@
 import MyButton from './Button.vue';
 import MyProfile from './Profile.vue';
 import { NearWallet } from '@neardev/vue-use-near-api';
-import { defineComponent, inject } from '@vue/runtime-core';
+import { defineComponent } from '@vue/runtime-core';
 
 export default defineComponent({
   name: 'my-header1',
@@ -22,10 +26,6 @@ export default defineComponent({
     MyButton,
     MyProfile,
     NearWallet,
-  },
-  setup() {
-    console.log('inject in app', inject('walletConnection'));
-    console.log(this.$walletConnection);
   },
 });
 </script>
