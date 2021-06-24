@@ -1,9 +1,7 @@
 <template>
   <header>
     <div class="flex justify-end m-4">
-      <near-wallet v-slot="{ isSignedIn, handleSignIn, formattedAmount, amount }">
-        <div>{{ formattedAmount }}asdfasdf</div>
-        <div>{{ amount }}</div>
+      <near-wallet v-slot="{ isSignedIn, handleSignIn }">
         <div>
           <my-profile v-if="isSignedIn" />
           <my-button size="large" label="Log in" @click="handleSignIn" v-else />
