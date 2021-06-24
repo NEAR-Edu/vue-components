@@ -1,11 +1,10 @@
 import * as NearAPI from 'near-api-js';
 import { App } from 'vue';
-import getConfig from './config';
+import { NearNetworkConfig } from './types';
 
 const { connect, keyStores, WalletConnection } = NearAPI;
-const nearConfig = getConfig(process.env.NODE_ENV || 'development');
 
-export async function initNear(app: App): Promise<void> {
+export async function initNear(app: App, nearConfig: NearNetworkConfig): Promise<void> {
   console.log('initializing to connect near network');
   try {
     if (!app) {

@@ -1,4 +1,4 @@
-import type { NearNetworkConfig } from './types';
+import type { NearNetworkConfig } from '@neardev/vue-use-near-api';
 const CONTRACT_NAME = process.env.VUE_APP_CONTRACT_NAME || 'dev-1622023860692-5474128';
 
 export default function getConfig(env: string): NearNetworkConfig {

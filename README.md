@@ -1,16 +1,18 @@
-# Installation
+# Vue use near api
+
+## Installation
   
   in root directory, please type following command.  
   ```sh
   npx lerna bootstrap
   ```
 
-  ## Build package
+  ### Build package
   ```sh
   yarn build
   ```
 
-  ## Build example app
+  ### Build example app
 
   - Link local package with example
 
@@ -34,9 +36,9 @@
     just now, if you encounter eslint problem for files built in package, then please try again(yarn serve).
     I already add eslint ignore pattern for this, but it not working well, but I will try to fix it soon.
 
-# Usage of components
+## Usage of wallet component
 
-## Initialize near connection
+### Initialize near connection
 
 near api require [initialization](https://docs.near.org/docs/develop/front-end/introduction#connection) to connect to near network.
 To do this, you can use `initNear` function from vue-use-near-api package.
@@ -50,8 +52,6 @@ initNear(app)
     app.mount('#app');
   });
 ```
-
-## Usage of Wallet Component
 
 ### Declarative Component
 
