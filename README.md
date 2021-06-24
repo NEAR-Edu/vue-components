@@ -26,7 +26,7 @@ initNear(app, config).then(() => {
 });
 ```
 
-for near configuration file, please may looks like [this](https://github.com/near/create-near-app/blob/master/templates/vue/src/config.js)
+for near configuration file, you can refer [this configuration example](https://github.com/near/create-near-app/blob/master/templates/vue/src/config.js)
 
 ### Declarative Component
 
