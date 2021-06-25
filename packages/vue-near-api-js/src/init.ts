@@ -18,9 +18,9 @@ export async function initNear(app: App, nearConfig: NearNetworkConfig): Promise
 
     const near = await connect({
       ...nearConfig,
-      deps: { keyStore: new keyStores.BrowserLocalStorageKeyStore() },
+      keyStore: new keyStores.BrowserLocalStorageKeyStore(window.localStorage, `${nearConfig.appKeyPrefix}:keystore:`),
     });
-    const walletConnection = new WalletConnection(near, null);
+    const walletConnection = new WalletConnection(near, nearConfig.appKeyPrefix);
     app.config.globalProperties.$walletConnection = walletConnection;
     app.config.globalProperties.$accountId = walletConnection.getAccountId();
     app.config.globalProperties.$config = nearConfig;

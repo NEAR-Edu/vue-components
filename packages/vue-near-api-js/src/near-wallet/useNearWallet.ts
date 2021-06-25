@@ -44,15 +44,32 @@ export function useNearWallet(): NearWalletComposable {
     lastStatusMessage.value = newMessage;
   };
 
-  onMounted(() => {
+  onMounted(async () => {
     const connection = toRef(state, 'rawConnection');
+    const config = toRef(state, 'config');
     if (!connection.value) {
       console.log(`warning in package, connection not established.
       please try to check you did call the initNear function globally`);
       setStatus(NearWalletStatus.ERROR, NearWalletStatusCode.CONNECTION_FAILED, 'invalid connection');
       return;
     }
-    if (connection.value.isSignedIn()) {
+
+    /****************************
+    After authorizing from near, page will be redrected here.
+    At this time, near pakcage will initialize all of auth data(_authData) of wallet connection on this page
+    as following,
+    /// In WalletConnection's constructor
+        if (!this.isSignedIn()) {
+            this._completeSignInWithAccessKey();
+        }
+    so all wallet components will recognized as signed in already, because isSignedIn function only check if
+    wallet connection's _authData is valid.
+    so when you are going to use multiple wallet connection on the same page, then we have to check if the accounts
+    of its network id exist.
+    ****************************/
+
+    const accounts = await connection.value._near.config.keyStore.getAccounts(config.value.networkId);
+    if (connection.value.isSignedIn() && accounts && accounts.length > 0) {
       const isSignedIn = toRef(state, 'isSignedIn');
       isSignedIn.value = true;
       setStatus(NearWalletStatus.SUCCESS, NearWalletStatusCode.SIGNED_IN, 'signed in to near network');
