@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance } from '@vue/runtime-core';
+import { defineComponent } from '@vue/runtime-core';
 // import MyHeader from './components/Header.vue';
 import MyHeader1 from './components/Header1.vue';
 
@@ -26,10 +26,6 @@ const App = defineComponent({
   components: {
     // MyHeader,
     MyHeader1,
-  },
-  setup() {
-    const app = getCurrentInstance();
-    console.log('wallet app', app?.appContext.config.globalProperties);
   },
 });
 

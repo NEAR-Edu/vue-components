@@ -19,13 +19,44 @@ Don't forget the call of initNear must be come up before root component will be 
 ```js
 import { initNear } from '@neardev/vue-use-near-api';
 const app = createApp(App);
-const nearConfig = getConfig(process.env.NODE_ENV || 'development');
-initNear(app, config).then(() => {
-  app.mount('#app');
+const nearConfig = {
+  ...getConfig('development'),
+  appKeyPrefix: 'app',
+  contractName: 'dev-1622023860692-5474128',
+};
+initNear(app, nearConfig).then(() => {
+  app1.mount('#app');
 });
 ```
 
 for near configuration file, you can refer [this configuration example](https://github.com/near/create-near-app/blob/master/templates/vue/src/config.js)
+
+## For multiple near sign in on the same page
+
+currently, near api doesn't want to support multiple login on the same page, but you can try to implement it via this package.
+
+```js
+const app1 = createApp(App);
+const nearConfig1 = {
+  ...getConfig('development'),
+  appKeyPrefix: 'app1',
+  contractName: 'dev-1622023860692-5474128',
+};
+initNear(app1, nearConfig1).then(() => {
+  app1.mount('#app1');
+});
+
+const nearConfig2 = {
+  ...getConfig('development'),
+  appKeyPrefix: 'app2',
+  contractName: 'dev-1622023860692-5472343',
+};
+
+const app2 = createApp(App); // or maybe you can use another root component.
+initNear(app2, nearConfig2).then(() => {
+  app2.mount('#app2');
+});
+```
 
 ## Declarative Component
 
@@ -127,9 +158,9 @@ const {
 
 ## Types
 
-[MaybeRef](https://github.com/KittyDragon88/vue-use-near-api/blob/dev/packages/vue-near-api-js/src/near-wallet/wallet-types.ts)
+[MaybeRef](https://github.com/KittyDragon88/vue-use-near-api/blob/master/packages/vue-near-api-js/src/near-wallet/wallet-types.ts)
 
-[NearWalletStatus](https://github.com/KittyDragon88/vue-use-near-api/blob/dev/packages/vue-near-api-js/src/near-wallet/wallet-types.ts)
+[NearWalletStatus](https://github.com/KittyDragon88/vue-use-near-api/blob/master/packages/vue-near-api-js/src/near-wallet/wallet-types.ts)
 
 * `SUCCESS`: last action has been successed.
 
@@ -137,7 +168,7 @@ const {
 
 * `ERROR`: last action has resulted in error.
 
-[NearWalletStatusCode](https://github.com/KittyDragon88/vue-use-near-api/blob/dev/packages/vue-near-api-js/src/near-wallet/wallet-types.ts)
+[NearWalletStatusCode](https://github.com/KittyDragon88/vue-use-near-api/blob/master/packages/vue-near-api-js/src/near-wallet/wallet-types.ts)
   
   * `INITAL`: connection action has successed.
     - status will be `SUCCESS`.

@@ -5,12 +5,21 @@ import './scss/tailwind.scss';
 import getConfig from './config';
 
 const app1 = createApp(App);
-const nearConfig1 = getConfig(process.env.NODE_ENV || 'development');
+const nearConfig1 = {
+  ...getConfig('development'),
+  appKeyPrefix: 'app1',
+  contractName: 'dev-1622023860692-5474128',
+};
 initNear(app1, nearConfig1).then(() => {
   app1.mount('#app1');
 });
 
-const nearConfig2 = getConfig('betanet');
+const nearConfig2 = {
+  ...getConfig('betanet'),
+  appKeyPrefix: 'app2',
+  contractName: 'beta--1622023860692-5474129',
+};
+
 const app2 = createApp(App);
 initNear(app2, nearConfig2).then(() => {
   app2.mount('#app2');

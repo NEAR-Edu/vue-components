@@ -1,11 +1,13 @@
 import type { NearNetworkConfig } from '@neardev/vue-use-near-api';
-const CONTRACT_NAME = process.env.VUE_APP_CONTRACT_NAME || 'dev-1622023860692-5474128';
+const CONTRACT_NAME = process.env.VUE_APP_DEFAULT_CONTRACT_NAME;
+const APP_PREFIX = process.env.VUE_APP_DEFAULT_APP_PREFIX || 'null';
 
 export default function getConfig(env: string): NearNetworkConfig {
   switch (env) {
     case 'production':
     case 'mainnet':
       return {
+        appKeyPrefix: APP_PREFIX,
         networkId: 'mainnet',
         nodeUrl: 'https://rpc.mainnet.near.org',
         contractName: CONTRACT_NAME,
@@ -16,6 +18,7 @@ export default function getConfig(env: string): NearNetworkConfig {
     case 'development':
     case 'testnet':
       return {
+        appKeyPrefix: APP_PREFIX,
         networkId: 'testnet',
         nodeUrl: 'https://rpc.testnet.near.org',
         contractName: CONTRACT_NAME,
@@ -25,6 +28,7 @@ export default function getConfig(env: string): NearNetworkConfig {
       };
     case 'betanet':
       return {
+        appKeyPrefix: APP_PREFIX,
         networkId: 'betanet',
         nodeUrl: 'https://rpc.betanet.near.org',
         contractName: CONTRACT_NAME,
@@ -34,6 +38,7 @@ export default function getConfig(env: string): NearNetworkConfig {
       };
     case 'local':
       return {
+        appKeyPrefix: APP_PREFIX,
         networkId: 'local',
         nodeUrl: 'http://localhost:3030',
         keyPath: `${process.env.HOME}/.near/validator_key.json`,
@@ -43,6 +48,7 @@ export default function getConfig(env: string): NearNetworkConfig {
     case 'test':
     case 'ci':
       return {
+        appKeyPrefix: APP_PREFIX,
         networkId: 'shared-test',
         nodeUrl: 'https://rpc.ci-testnet.near.org',
         contractName: CONTRACT_NAME,
@@ -50,6 +56,7 @@ export default function getConfig(env: string): NearNetworkConfig {
       };
     case 'ci-betanet':
       return {
+        appKeyPrefix: APP_PREFIX,
         networkId: 'shared-test-staging',
         nodeUrl: 'https://rpc.ci-betanet.near.org',
         contractName: CONTRACT_NAME,
