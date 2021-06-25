@@ -49,7 +49,7 @@ initNear(app1, nearConfig1).then(() => {
 const nearConfig2 = {
   ...getConfig('development'),
   appKeyPrefix: 'app2',
-  contractName: 'dev-1622023860692-5472343',
+  contractName: 'dev-1622023860692-5474128',
 };
 
 const app2 = createApp(App); // or maybe you can use another root component.
@@ -158,7 +158,7 @@ const {
 
 ## Types
 
-[MaybeRef](https://github.com/KittyDragon88/vue-use-near-api/blob/master/packages/vue-near-api-js/src/near-wallet/wallet-types.ts)
+[MaybeRef](https://github.com/KittyDragon88/vue-use-near-api/blob/master/packages/vue-near-api-js/src/types.ts)
 
 [NearWalletStatus](https://github.com/KittyDragon88/vue-use-near-api/blob/master/packages/vue-near-api-js/src/near-wallet/wallet-types.ts)
 
