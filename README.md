@@ -1,6 +1,5 @@
-# Vue use near api
+# Installation
 
-## Installation
 ```sh
 # install with yarn
 yarn add @neardev/vue-use-near-api
@@ -9,9 +8,9 @@ yarn add @neardev/vue-use-near-api
 npm install @neardev/vue-use-near-api
 ```
 
-## Usage of wallet component
+# Usage of wallet component
 
-### Initialize near connection
+## Initialize near connection
 
 near api require [initialization](https://docs.near.org/docs/develop/front-end/introduction#connection) to connect to near network.
 To do this, you can use `initNear` function from vue-use-near-api package.
@@ -28,7 +27,7 @@ initNear(app, config).then(() => {
 
 for near configuration file, you can refer [this configuration example](https://github.com/near/create-near-app/blob/master/templates/vue/src/config.js)
 
-### Declarative Component
+## Declarative Component
 
 wallet component offers two styles to integrate near wallet api into your Vue.js app
 Higher-order component(HOC) are better suited for most developers not familiar with composition api. Register the NearWallet components and use functions and data which are exported via v-slot.
@@ -55,7 +54,7 @@ export default defineComponent({
 });
 ```
 
-### Composition API
+## Composition API
 
 If you want more nice grained control, you can use `useNearWallet` function to compose near wallet logic into your component.
 
@@ -88,7 +87,7 @@ Then, in your template, you can use functions and data as your demand.
 </div>
 ```
 
-### State
+## State
 
 The useNearWallet function exposes the following reactive state:
 
@@ -118,7 +117,7 @@ const {
 | formattedAmount   | `MaybeRef<string>`               | The human readable format of amount. ex : 199997772695975000000000000 |
 | isSignedIn        | `MaybeRef<boolean>`              | Show whether logged in or not.                                                                                                                                                  |
 
-### Methods
+## Methods
 
 | Signature              | Description                       |
 |------------------------|-----------------------------------|
@@ -126,7 +125,7 @@ const {
 | handleSignOut(void)    | Sign out from near network        |
 | handleSyncAmount(void) | Sync amount of the wallet account |
 
-### Types
+## Types
 
 [MaybeRef](https://github.com/KittyDragon88/vue-use-near-api/blob/dev/packages/vue-near-api-js/src/near-wallet/wallet-types.ts)
 
@@ -173,7 +172,7 @@ const {
     - lastStatusMessage will be `synced with near account`
 
 
-## Build this repository
+# Build this repository
 
 in root directory, please type following command.
 
@@ -181,13 +180,13 @@ in root directory, please type following command.
 npx lerna bootstrap
 ```
 
-### Build package
+## Build package
 
 ```sh
 yarn build
 ```
 
-### Build example app
+## Build example app
 
 - Link local package with example
 
