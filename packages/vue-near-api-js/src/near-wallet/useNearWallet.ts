@@ -8,6 +8,7 @@ import {
 } from './wallet-types';
 import { NearWalletContextSymbol } from './wallet-symbols';
 
+const LOCAL_STORAGE_KEY_SUFFIX = '_wallet_auth_key';
 const { utils } = NearAPI;
 
 declare global {
@@ -82,6 +83,10 @@ export function useNearWallet(): NearWalletComposable {
   const handleSignIn = () => {
     const connection = toRef(state, 'rawConnection');
     const nearConfig = toRef(state, 'config');
+    // In multiple login situation, if authData of the app has already initialized by another signin, then clear it.
+    const authDataKey = nearConfig.value.appKeyPrefix + LOCAL_STORAGE_KEY_SUFFIX;
+    window.localStorage.removeItem(authDataKey);
+
     setStatus(NearWalletStatus.LOADING, NearWalletStatusCode.SIGNING_IN, 'signing in near network');
     connection.value
       .requestSignIn(nearConfig.value.contractName)

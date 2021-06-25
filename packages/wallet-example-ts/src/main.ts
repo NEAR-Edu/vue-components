@@ -15,9 +15,9 @@ initNear(app1, nearConfig1).then(() => {
 });
 
 const nearConfig2 = {
-  ...getConfig('betanet'),
+  ...getConfig('development'),
   appKeyPrefix: 'app2',
-  contractName: 'beta--1622023860692-5474129',
+  contractName: 'dev-1622023860692-5474128',
 };
 
 const app2 = createApp(App);
