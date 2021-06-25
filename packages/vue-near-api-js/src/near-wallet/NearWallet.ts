@@ -1,4 +1,4 @@
-import { defineComponent, h } from '@vue/runtime-core';
+import { defineComponent } from '@vue/runtime-core';
 import { useNearWallet } from './useNearWallet';
 import { unref } from 'vue';
 
