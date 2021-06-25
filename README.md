@@ -1,6 +1,14 @@
-# Vue use near api
+# Installation
+
+## when use the npm package published
+
+```sh
+yarn add @neardev/vue-use-near-api-test
+```
+## Develop the package and test example app locally.
 
 ## Installation
+
 ```sh
 # install with yarn
 yarn add @neardev/vue-use-near-api
@@ -9,9 +17,9 @@ yarn add @neardev/vue-use-near-api
 npm install @neardev/vue-use-near-api
 ```
 
-## Usage of wallet component
+# Usage of wallet component
 
-### Initialize near connection
+## Initialize near connection
 
 near api require [initialization](https://docs.near.org/docs/develop/front-end/introduction#connection) to connect to near network.
 To do this, you can use `initNear` function from vue-use-near-api package.
